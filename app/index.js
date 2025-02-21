@@ -17,13 +17,14 @@ async function setup(rootDir) {
 }
 
 async function build() {
+  const langs = ["en", "fr"];
   const rootDir = import.meta.dirname;
   const wordPressService = new WordPressService(config.wordpress);
   const handlebarsHelper = new HandlebarsHelper(config, rootDir);
   await handlebarsHelper.setup();
   await setup(rootDir);
 
-  ["en", "fr"].forEach(async (lang) => {
+  langs.forEach(async (lang) => {
     const menu = await wordPressService.getMenu(lang);
     menu.forEach(async (item) => {
       await handlebarsHelper.renderPage(wordPressService, menu, item, lang);
