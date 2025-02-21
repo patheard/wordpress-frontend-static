@@ -1,0 +1,14 @@
+# Secrets
+.env
+
+# Node dependencies
+node_modules
+
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+# Built site
+dist

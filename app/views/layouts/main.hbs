@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="{{page.lang}}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{page.title.rendered}} - {{siteName}}</title>
+
+    <!-- Icons Font Awesome (to access icons, import Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous">
+
+    <!-- GC Design System -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-utility@1.5.0/dist/gcds-utility.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.31.0/dist/gcds/gcds.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.31.0/dist/gcds/gcds.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.31.0/dist/gcds/gcds.js"
+    ></script>
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/public/css/styles.css">
+  </head>
+
+  <body>
+
+    {{> header}}
+
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <gcds-heading tag="h1">{{page.title.rendered}}</gcds-heading>
+
+        {{{updateMarkup page.content.rendered}}}
+
+      <gcds-date-modified>{{dateFormat page.modified}}</gcds-date-modified>
+    </gcds-container>
+
+    </gcds-container>
+
+    {{> footer}}
+
+  </body>
+</html>
