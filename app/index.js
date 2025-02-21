@@ -16,13 +16,10 @@ async function setup(rootDir) {
   );
 }
 
-async function build() {
-  const langs = ["en", "fr"];
-  const rootDir = import.meta.dirname;
+async function build(rootDir, langs) {
   const wordPressService = new WordPressService(config.wordpress);
   const handlebarsHelper = new HandlebarsHelper(config, rootDir);
   await handlebarsHelper.setup();
-  await setup(rootDir);
 
   langs.forEach(async (lang) => {
     const menu = await wordPressService.getMenu(lang);
@@ -38,4 +35,5 @@ async function build() {
   });
 }
 
-build();
+await setup(import.meta.dirname);
+await build(import.meta.dirname, ["en", "fr"]);
