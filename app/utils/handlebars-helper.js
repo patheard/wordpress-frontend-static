@@ -25,7 +25,7 @@ export default class HandlebarsHelper {
     }
   }
 
-  async renderPage(wordPressService, menu, menuItem, lang) {
+  async renderPage(page, menu, menuItem, lang) {
     try {
       if (menuItem.type === "post_type") {
         const pagePath = menuItem.url.replace(this.config.wordpress.url, "");
@@ -36,14 +36,12 @@ export default class HandlebarsHelper {
           ...pathSegments,
         );
 
-        const slug = wordPressService.getPageSlugFromPath(pagePath);
-        const page = await wordPressService.getPage(slug, lang);
         const html = await this.renderTemplate(
           path.join(this.rootDir, "views", "layouts", "main.hbs"),
           {
             page: page,
-            menuItems: menu,
-            isHome: slug === "home",
+            menu: menu,
+            isHome: pagePath === "/",
             langSwap: lang === "en" ? "fr" : "en",
             langSwapSlug: lang === "en" ? page.slug_fr : page.slug_en,
             siteName: this.config.site.names[lang],

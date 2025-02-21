@@ -22,15 +22,13 @@ async function build(rootDir, langs) {
   await handlebarsHelper.setup();
 
   langs.forEach(async (lang) => {
-    const menu = await wordPressService.getMenu(lang);
-    menu.forEach(async (item) => {
-      await handlebarsHelper.renderPage(wordPressService, menu, item, lang);
+    const menuRaw = await wordPressService.getMenu(lang);
+    const menuTree = wordPressService.createMenuTree(menuRaw);
 
-      if (item.children.length) {
-        item.children.forEach(async (item) => {
-          await handlebarsHelper.renderPage(wordPressService, menu, item, lang);
-        });
-      }
+    menuRaw.forEach(async (menuItem) => {
+      const slug = wordPressService.getPageSlugFromUrl(menuItem.url);
+      const page = await wordPressService.getPage(slug, lang);
+      await handlebarsHelper.renderPage(page, menuTree, menuItem, lang);
     });
   });
 }

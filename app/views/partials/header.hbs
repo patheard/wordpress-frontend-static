@@ -1,9 +1,9 @@
 <gcds-header {{#if langSwapSlug}}lang-href="/{{langSwapSlug}}?lang={{langSwap}}"{{/if}} skip-to-href="#main-content">
     
-    {{#if menuItems}}
+    {{#if menu}}
     <gcds-top-nav slot="menu" label="Main menu" alignment="right">
         <gcds-nav-link href="/" slot="home">{{siteName}}</gcds-nav-link>
-        {{#each menuItems}}
+        {{#each menu}}
             {{#if children}}
                 <gcds-nav-group  open-trigger="{{title.rendered}}" menu-label="{{title.rendered}}">
                     {{#each children}}

@@ -30,15 +30,15 @@ export default class WordPressService {
           },
         },
       );
-      return this.createMenuTree(response.data);
+      return response.data;
     } catch (error) {
       console.error("Error fetching menu:", error.message);
       throw error;
     }
   }
 
-  getPageSlugFromPath(pagePath) {
-    const segments = pagePath.split("/").filter(Boolean);
+  getPageSlugFromUrl(url) {
+    const segments = url.split("/").filter(Boolean);
     const slug = segments[segments.length - 1] || "home";
     return slug;
   }
